@@ -5,13 +5,14 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.sistema.ordenes.DashboardController">
    <children>
-      <TableView layoutX="14.0" layoutY="24.0" prefHeight="353.0" prefWidth="274.0">
+      <TableView fx:id="tableProducts" layoutX="14.0" layoutY="24.0" prefHeight="353.0" prefWidth="274.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="colId" prefWidth="65.0" text="ID" />
+          <TableColumn fx:id="colName" prefWidth="69.0" text="Producto" />
+            <TableColumn fx:id="colStock" prefWidth="59.0" text="Stock" />
+            <TableColumn fx:id="colPrice" text="Precio" />
         </columns>
       </TableView>
       <PieChart layoutX="300.0" layoutY="23.0" prefHeight="353.0" prefWidth="284.0" />
