@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.chart.PieChart;
 
 import java.security.PrivateKey;
 
@@ -17,6 +18,8 @@ public class DashboardController {
     @FXML private TableColumn <Product,String> colName;
     @FXML private TableColumn <Product,Integer> colStock;
     @FXML private TableColumn <Product, Double> colPrice;
+
+    @FXML private PieChart chartStock;
 
     @FXML
     public void initialize(){
@@ -34,6 +37,21 @@ public class DashboardController {
 
         tableProducts.setItems(data);
 
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+
+        for(Product p:data){
+            pieChartData.add(new PieChart.Data(p.getName(),p.getStock()));
+        }
+        chartStock.setData(pieChartData);
+        chartStock.setTitle("Distribución de inventario");
+
+        chartStock.getData().forEach(dataPiece->{
+            String label= String.format("%s:%.0f", dataPiece.getName(),dataPiece.getPieValue());
+            dataPiece.setName(label);
+        });
+
+        chartStock.setLabelsVisible(true);
+        chartStock.setLabelLineLength(20);
     }
 
 }
