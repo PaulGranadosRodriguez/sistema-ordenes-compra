@@ -1,4 +1,5 @@
-package com.sistema.ordenes;
+package com.sistema.ordenes.controller;
+import com.sistema.ordenes.model.Product;
 import java.util.ArrayList;
 import java.util.List;
 

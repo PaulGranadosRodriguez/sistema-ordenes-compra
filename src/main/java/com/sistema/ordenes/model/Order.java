@@ -1,4 +1,4 @@
-package com.sistema.ordenes;
+package com.sistema.ordenes.model;
 import java.util.ArrayList;
 import java.util.List;
 

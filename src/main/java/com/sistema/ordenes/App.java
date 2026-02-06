@@ -12,12 +12,12 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        // Esta línea busca el archivo en la carpeta de resources que acabamos de crear
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sistema/ordenes/Dashboard.fxml"));
+        // Esta línea busca el archivo en la carpeta de resources donde está el menú
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sistema/ordenes/view/Menu.fxml"));
         Parent root = loader.load();
         
         Scene scene = new Scene(root);
-        stage.setTitle("Sistema de Órdenes - Dashboard Profesional");
+        stage.setTitle("Sistema de Gestión - Menú Principal");
         stage.setScene(scene);
         stage.show();
     }

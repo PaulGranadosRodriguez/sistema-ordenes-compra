@@ -1,12 +1,11 @@
-package com.sistema.ordenes;
+package com.sistema.ordenes.controller;
+import com.sistema.ordenes.model.Product;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.chart.PieChart;
-
-import java.security.PrivateKey;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

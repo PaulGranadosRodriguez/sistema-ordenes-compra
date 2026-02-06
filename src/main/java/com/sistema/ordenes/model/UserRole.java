@@ -1,4 +1,4 @@
-package com.sistema.ordenes;
+package com.sistema.ordenes.model;
 public enum UserRole {
     ADMIN,
     COMPRADOR,

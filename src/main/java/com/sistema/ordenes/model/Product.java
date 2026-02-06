@@ -1,4 +1,4 @@
-package com.sistema.ordenes;
+package com.sistema.ordenes.model;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
