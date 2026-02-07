@@ -1,0 +1,15 @@
+.button{
+    -fx-font-weight:bold;
+    -fx-transition:0.2s,
+}
+
+.button:hover{
+    -fx-cursor:hand;
+    -fx-brigtness:1.1;
+}
+
+button:pressed{
+    -fx-scale-x: 095;
+    -fx-scale-y: 095;
+    fx-brightness:0.90;
+}
