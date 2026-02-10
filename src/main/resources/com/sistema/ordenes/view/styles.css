@@ -1,15 +1,19 @@
 .button{
-    -fx-font-weight:bold;
-    -fx-transition:0.2s,
+    -fx-font-weight: bold;
+    -fx-font-size:20px;
 }
 
 .button:hover{
     -fx-cursor:hand;
-    -fx-brigtness:1.1;
+    -fx-brightness:1.2;
+    -fx-text-fill:rgb(214, 133, 157);
 }
 
-button:pressed{
-    -fx-scale-x: 095;
-    -fx-scale-y: 095;
-    fx-brightness:0.90;
+.button:pressed{
+    -fx-brightness:0.90;
+    -fx-text-fill:rgb(49, 153, 212);
+}
+
+.button:focused{
+    -fx-background-color: derive(-fx-base, -10%);
 }

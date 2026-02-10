@@ -1,6 +1,7 @@
 module com.sistema.ordenes {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.graphics;
 
     opens com.sistema.ordenes to javafx.fxml; //Paquetes para que cargue los FXML
     opens com.sistema.ordenes.controller to javafx.fxml;
