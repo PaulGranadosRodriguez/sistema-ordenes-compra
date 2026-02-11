@@ -6,7 +6,7 @@
 .button:hover{
     -fx-cursor:hand;
     -fx-brightness:1.2;
-    -fx-text-fill:rgb(214, 133, 157);
+    -fx-text-fill:rgb(65, 121, 118);
 }
 
 .button:pressed{

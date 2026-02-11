@@ -5,8 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
-
-
+import com.sistema.ordenes.database.DatabaseConnection;
 
 public class App extends Application {
 
@@ -15,6 +14,8 @@ public class App extends Application {
         // Esta línea busca el archivo en la carpeta de resources donde está el menú
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/sistema/ordenes/view/Menu.fxml"));
         Parent root = loader.load();
+
+        DatabaseConnection.createTables();
         
         Scene scene = new Scene(root);
         stage.setTitle("Sistema de Gestión - Menú Principal");

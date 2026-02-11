@@ -30,6 +30,19 @@ public class Product {
         return stock.get();
     }
 
+    public SimpleIntegerProperty idProperty(){
+        return id;
+    }
+    public SimpleStringProperty nameProperty(){
+        return name;
+    }
+    public SimpleDoubleProperty priceProperty(){
+        return price;
+    }
+    public SimpleIntegerProperty stockProperty(){
+        return stock;
+    }
+
     @Override
     public String toString(){
         return name + "($" + price +")";

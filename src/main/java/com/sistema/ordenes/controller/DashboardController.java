@@ -1,4 +1,5 @@
 package com.sistema.ordenes.controller;
+import com.sistema.ordenes.database.DatabaseConnection;
 import com.sistema.ordenes.model.Product;
 
 import javafx.fxml.FXML;
@@ -9,6 +10,10 @@ import javafx.scene.chart.PieChart;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DashboardController {
     
@@ -27,30 +32,43 @@ public class DashboardController {
         colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         
-        //Lista de prueba
-        ObservableList<Product>data = FXCollections.observableArrayList(
-            new Product(1,"Laptop", 10, 1500.0),
-            new Product(2, "Mouse", 50, 25.0),
-            new Product(3,"Teclado", 30 , 45.0)
-        );
+        loadDataFromDatabase();
+    }
 
-        tableProducts.setItems(data);
+    private void loadDataFromDatabase(){
+        ObservableList<Product> data=FXCollections.observableArrayList();
+        String sql= "SELECT * FROM products";
 
-        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        try (Connection conn = DatabaseConnection.getConnection();
+            Statement stmt=conn.createStatement();
+            ResultSet rs= stmt.executeQuery(sql)){
+                while (rs.next()) {
+                    data.add(new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getInt("stock"),
+                        rs.getDouble("price")
+                    ));
+                }
+                tableProducts.setItems(data);
+                updatePiechart(data);
+            
+        } catch (Exception e) {
+            System.err.println("Error al cargar datos: " + e.getMessage());
 
-        for(Product p:data){
+        }      
+    }
+
+    private void updatePiechart(ObservableList<Product> data){
+        ObservableList<PieChart.Data> pieChartData= FXCollections.observableArrayList();
+        for (Product p:data){
             pieChartData.add(new PieChart.Data(p.getName(),p.getStock()));
         }
         chartStock.setData(pieChartData);
         chartStock.setTitle("Distribución de inventario");
-
-        chartStock.getData().forEach(dataPiece->{
-            String label= String.format("%s:%.0f", dataPiece.getName(),dataPiece.getPieValue());
-            dataPiece.setName(label);
+        chartStock.getData().forEach(piece->{
+            String label=String.format("%s: %.0f uds", piece.getName(), piece.getPieValue());
+            piece.setName(label);
         });
-
-        chartStock.setLabelsVisible(true);
-        chartStock.setLabelLineLength(20);
     }
-
 }
