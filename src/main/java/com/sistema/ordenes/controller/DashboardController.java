@@ -3,13 +3,20 @@ import com.sistema.ordenes.database.DatabaseConnection;
 import com.sistema.ordenes.model.Product;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,5 +77,24 @@ public class DashboardController {
             String label=String.format("%s: %.0f uds", piece.getName(), piece.getPieValue());
             piece.setName(label);
         });
+    }
+    
+    @FXML
+    private void openAddProductWindow(){
+        try {
+            FXMLLoader louder = new FXMLLoader(getClass().getResource("/com/sistema/ordenes/view/AddProduct.fxml"));
+            Parent root= louder.load();
+
+            Stage stage= new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Nuevo Producto");
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+            loadDataFromDatabase();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
