@@ -18,15 +18,25 @@ public class DatabaseConnection {
         }
     }
     public static void createTables(){
-        String sql= "CREATE TABLE IF NOT EXISTS products ("
-                    + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                    + "name TEXT NOT NULL,"
-                    + "stock INTEGER NOT NULL,"
-                    + "price REAL NOT NULL"
-                    + ");";
+        
+        String sqlBrands = "CREATE TABLE IF NOT EXISTS brands("
+                           +"id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                           +"name TEXT NOT NULL UNIQUE "
+                           +");";        
+        
+        String sqlProducts=   "CREATE TABLE IF NOT EXISTS products ("
+                            + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                            + "name TEXT NOT NULL, "
+                            + "stock INTEGER NOT NULL, "
+                            + "price REAL NOT NULL, "
+                            + "brand_id INTEGER, "
+                            + "FOREIGN KEY (brand_id) REFERENCES brands(id)"
+                            + ");";
         try(Connection conn = getConnection();
             Statement stmt= conn.createStatement()){
-                stmt.execute(sql);
+                stmt.execute("PRAGMA foreign_keys=ON;");
+                stmt.execute(sqlBrands);
+                stmt.execute(sqlProducts);
                 System.out.println("Base de datos lista y tabla 'products' verificada.");
             }catch (SQLException e) {
                 System.err.print("Errror al crear la tabla "+ e.getMessage());
