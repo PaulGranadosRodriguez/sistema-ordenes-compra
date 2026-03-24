@@ -9,9 +9,6 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 import java.io.IOException;
 
-
-
-
 public class MenuController {
 
 
@@ -21,13 +18,18 @@ public class MenuController {
             FXMLLoader loader= new FXMLLoader(getClass().getResource("/com/sistema/ordenes/view/Dashboard.fxml"));
             Parent root=loader.load();
 
-            Stage currentStage=(Stage)((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
+            
 
-            Stage newStage= new Stage();
-            newStage.setScene(new Scene(root));
-            newStage.setTitle("Dashboard-Sistema de Gestion");
-            newStage.show();
+            Stage menuStage=(Stage)((Node) event.getSource()).getScene().getWindow();
+            menuStage.hide();
+
+            Stage dashboardStage= new Stage();
+            dashboardStage.setScene(new Scene(root));
+            dashboardStage.setTitle("Dashboard-Sistema de Gestion");
+            
+            dashboardStage.setOnCloseRequest(e->menuStage.show());
+            
+            dashboardStage.show();
 
         }catch(IOException e){
             e.printStackTrace();

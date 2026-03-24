@@ -7,13 +7,15 @@ public class Product {
     private final SimpleStringProperty name;
     private final SimpleDoubleProperty price;
     private final SimpleIntegerProperty stock;
+    private final SimpleStringProperty brandName;
 
 
-    public Product(int id, String name, int stock,double price ){
+    public Product(int id, String name, int stock,double price, String brandName ){
         this.id= new SimpleIntegerProperty(id);
         this.name= new SimpleStringProperty(name);
         this.stock= new SimpleIntegerProperty(stock);
         this.price= new SimpleDoubleProperty(price);
+        this.brandName= new SimpleStringProperty(brandName);
 
     }
 
@@ -29,6 +31,9 @@ public class Product {
     public int getStock(){
         return stock.get();
     }
+    public String getBrandName(){
+        return brandName.get();
+    }
 
     public SimpleIntegerProperty idProperty(){
         return id;
@@ -41,6 +46,9 @@ public class Product {
     }
     public SimpleIntegerProperty stockProperty(){
         return stock;
+    }
+    public SimpleStringProperty brandNameProperty(){
+        return brandName;
     }
 
     @Override

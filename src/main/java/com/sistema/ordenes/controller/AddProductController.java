@@ -103,6 +103,23 @@ public class AddProductController {
         @FXML
         private void openAddBrandWindow(){
             System.out.println("Abriendo ventana para añadir nueva marca");
+            try {
+                javafx.fxml.FXMLLoader loader= new javafx.fxml.FXMLLoader(getClass().getResource("/com/sistema/ordenes/view/AddBrand.fxml"));
+                javafx.scene.Parent root= loader.load();
+                
+                Stage stage= new Stage();
+                stage.setTitle("Añadir Nueva Marca");
+                stage.setScene(new javafx.scene.Scene(root));
+
+                stage.initModality(javafx.stage.Modality.APPLICATION_MODAL);
+                stage.showAndWait();
+
+                loadBrands();
+
+            } catch (Exception e) {
+                System.err.println("Error al abrir la ventana de marcas"+ e.getMessage());
+            }
+        
         }
 
     private void showAlert(String title, String content) {

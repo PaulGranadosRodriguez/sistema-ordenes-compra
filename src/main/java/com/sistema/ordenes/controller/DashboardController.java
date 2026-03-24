@@ -27,6 +27,7 @@ public class DashboardController {
     @FXML private TableView <Product> tableProducts;
     @FXML private TableColumn <Product, Integer> colId;
     @FXML private TableColumn <Product,String> colName;
+    @FXML private TableColumn <Product, String> colBrand;
     @FXML private TableColumn <Product,Integer> colStock;
     @FXML private TableColumn <Product, Double> colPrice;
 
@@ -36,6 +37,7 @@ public class DashboardController {
     public void initialize(){
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colBrand.setCellValueFactory(new PropertyValueFactory<>("brandName"));
         colStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         colPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         
@@ -44,7 +46,10 @@ public class DashboardController {
 
     private void loadDataFromDatabase(){
         ObservableList<Product> data=FXCollections.observableArrayList();
-        String sql= "SELECT * FROM products";
+        
+        String sql= "SELECT p.id, p.name, p.stock, p.price, b.name as brand_name " +
+                    "FROM products p " +
+                    "LEFT JOIN brands b ON p.brand_id = b.id";
 
         try (Connection conn = DatabaseConnection.getConnection();
             Statement stmt=conn.createStatement();
@@ -54,7 +59,8 @@ public class DashboardController {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getInt("stock"),
-                        rs.getDouble("price")
+                        rs.getDouble("price"),
+                        rs.getString("brand_name") != null ? rs.getString("brand_name") : "Sin Marca"
                     ));
                 }
                 tableProducts.setItems(data);
